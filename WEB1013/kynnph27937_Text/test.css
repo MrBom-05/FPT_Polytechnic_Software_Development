@@ -1,0 +1,86 @@
+.wapper{
+    width: 980px;
+    margin: auto;
+}
+.header-main{
+    height: 100px;
+    text-align: center;
+    padding-top: 20px;
+}
+.nav-main{
+    height: 40px;
+    background: #c1080f;
+}
+.banner{
+    margin: 10px 0;
+}
+.content{
+    height: 900px;
+}
+.footer-main{
+    height: 50px;
+    background: #272f54;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    clear: both;
+}
+/* css nav-main */
+ .nav-main ul li{
+    list-style: none;
+    line-height: 40px;
+    float: left;
+    padding: 0 20px;
+}
+.nav-main ul li a{
+    text-decoration: none;
+    color: white;
+}
+.nav-main ul li:hover{
+    text-decoration: underline;
+}
+.search{
+    padding-top: 8px;
+}
+.txt-search{
+    width: 205px;
+    height: 25px;
+}
+.btn-search{
+    width: 100px;
+    height: 25px;
+    background: #272f54; color: #fff;
+}
+/* css sanpham */
+.cate-pro{
+    font-size: 20px;
+    font-weight: bold;
+    color: #272f54;
+    text-transform: uppercase;
+    padding: 15px 0;
+}
+.product{
+    width: 265px;
+    height: 360px;
+    border: 1px solid #c2c2c2;
+    float: left;
+    margin: 10px 15px 10px 0; text-align: center;
+    padding: 20px;
+}
+.name-pro a{
+    font-size: 16px;
+    font-weight: bold;
+    color:#2a2828 ;
+    text-decoration: none;
+}
+.name-pro a:hover{
+    color: #c1080f;
+}
+.price-pro{
+    font-size: 24px;
+    color: #c1080f;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+

@@ -1,0 +1,29 @@
+#wrapper{
+    width: 800px;
+    border: 1px, solid, #cccccc;
+    color: black;
+}
+.specialtext{
+    font-size: 12pt;
+    font-style: bold;
+    color: #ff0000;
+}
+.notes{
+    font-size: 11pt;
+    font-style: italic;
+    color: #e7e7e7;
+}
+.titlt{
+    color: #009294;
+    font-style: bold;
+}
+.text-links{
+    color: #000000;
+    font-size: 12pt;
+}
+.subp{
+    border: 1px, solid;
+    color: #000000;
+    font-weight: bold;
+    font-style: italic;
+}
