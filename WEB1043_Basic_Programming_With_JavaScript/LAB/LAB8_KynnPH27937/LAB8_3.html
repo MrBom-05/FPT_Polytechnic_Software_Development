@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3</title>
+    <style>
+        #container{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Custom HTML5 Video Player</h1>
+        <div id="player-container">
+            <video id="mypalyer" width="640" height="360">
+                <source src="img/Video.mp4" type="video/mp4">
+                Your browser does not support HTML5 Video.
+            </video>
+            <div id="controls">
+                <button onclick="playPause()">Play/Pause</button>
+                <button onclick="stopVideo()">Stop</button>
+                <button onclick="replayVideo()">Replay</button>
+                <button onclick="increaseVolume()">Volume (+)</button>
+                <button onclick="decreaseVolume()">Volume (-)</button>
+                <button onclick="muteVolume()">Mute/Unmute</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var Player = document.getElementById("myplayer");
+
+    function playPause() {
+        if (Player.paused) {
+            Player.play(); }
+        else {
+            Player.paused(); }
+    }
+    function stopVideo() {
+        Player.paused();
+        if(Player.currentTime){
+            Player.currentTime = 0}
+    }
+    function replayVideo(){
+        Player.currentTime = 0;
+        Player.play();
+    }
+    function increaseVolume(){
+        if(Player.volume < 1){
+            Player.volume = parseFloat(Player.volume + 0.1).toFixed(1);
+        }
+    }
+    function decreaseVolume(){
+        if(Player.volume > 0){
+            Player.volume = parseFloat(Player.volume - 0.1).toFixed(1);
+        }
+    }
+    function muteVolume(){
+        if(Player.muted){
+            Player.muted = false;}
+        else{
+            Player.muted = true;}
+    }
+</script>
+
+</html>

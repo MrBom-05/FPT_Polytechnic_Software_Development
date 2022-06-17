@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="Css/GioHang.css">
+
+</head>
+
+<body>
+    <div id="wapper">
+        <nav class="menu">
+            <div class="danhmuc">
+                <ul>
+                    <li><a href="SlideAnh.html">SLIDE ẢNH</a></li>
+                    <li><a href="GioHang.html">GIỎ HÀNG</a></li>
+                    <li><a href="DangKy.html">ĐĂNG KÍ</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="table-content">
+            <table border="1" cellpadding="2" id="bangHienThi">
+                <tr>
+                    <th></th>
+                    <th>Hàng hóa</th>
+                    <th>Hình ảnh</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" onchange="changeCheckBox(event)" /></td>
+                    <td>Giày Dior</td>
+                    <td><img class="item" src="./Img/Img_GioHang/1.jpg" /></td>
+                    <td class="price">4800000</td>
+                    <td><input type="number" class="soluong" disabled value="0" onchange="changeQuantity(event)" /></td>
+                    <td class='thanhtien'></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" onchange="changeCheckBox(event)" /></td>
+                    <td>Váy Dior</td>
+                    <td><img class="item" src="./Img/Img_GioHang/2.jpg" /></td>
+                    <td class="price">8000000</td>
+                    <td><input type="number" class="soluong" disabled value="0" onchange="changeQuantity(event)" /></td>
+                    <td class='thanhtien'></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" onchange="changeCheckBox(event)" /></td>
+                    <td>Dép Dior</td>
+                    <td><img class="item" src="./Img/Img_GioHang/3.jpg" /></td>
+                    <td class="price">3600000</td>
+                    <td><input type="number" class="soluong" disabled value="0" onchange="changeQuantity(event)" /></td>
+                    <td class='thanhtien'></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" onchange="changeCheckBox(event)" /></td>
+                    <td>Quần Dior</td>
+                    <td><img class="item" src="./Img/Img_GioHang/4.jpg" /></td>
+                    <td class="price">5200000</td>
+                    <td><input type="number" class="soluong" disabled value="0" onchange="changeQuantity(event)" /></td>
+                    <td class='thanhtien'></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" onchange="changeCheckBox(event)" /></td>
+                    <td>Váy Trẻ Em Dior</td>
+                    <td><img class="item" src="./Img/Img_GioHang/5.jpg" /></td>
+                    <td class="price">16000000</td>
+                    <td><input type="number" class="soluong" disabled value="0" onchange="changeQuantity(event)" /></td>
+                    <td class='thanhtien'></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" onchange="changeCheckBox(event)" /></td>
+                    <td>Khăn Tay Dior</td>
+                    <td><img class="item" src="./Img/Img_GioHang/6.jpg" /></td>
+                    <td class="price">11000000</td>
+                    <td><input type="number" class="soluong" disabled value="0" onchange="changeQuantity(event)" /></td>
+                    <td class='thanhtien'></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" onchange="changeCheckBox(event)" /></td>
+                    <td>Yếm Dior</td>
+                    <td><img class="item" src="./Img/Img_GioHang/7.jpg" /></td>
+                    <td class="price">12000000</td>
+                    <td><input type="number" class="soluong" disabled value="0" onchange="changeQuantity(event)" /></td>
+                    <td class='thanhtien'></td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="content">
+            <table class="bangBanHang" border="1" cellspacing="0" id="bangHienThi">
+                <tbody>
+                    <tr>
+                        <td colspan="3">Tổng tiền</td>
+                        <td id="tong">0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <footer class="footer">
+            Họ Và Tên: Nguyễn Ngọc Kỳ <br>
+            MSSV: PH27937 <br>
+            Lớp: IT17323 <br>
+        </footer>
+    </div>
+
+</body>
+<script>
+    function changeCheckBox(event) {
+        var currentCheck = event.currentTarget;
+        if (currentCheck.checked == true) {
+            currentCheck.closest('tr').querySelector('.soluong').disabled = false;
+            currentCheck.closest('tr').querySelector('.thanhtien').innerHTML = "0";
+            currentCheck.closest('tr').querySelector('.soluong').value = 0;
+        } else {
+            currentCheck.closest('tr').querySelector('.soluong').disabled = true;
+            currentCheck.closest('tr').querySelector('.thanhtien').innerHTML = "";
+            currentCheck.closest('tr').querySelector('.soluong').value = 0;
+        }
+    }
+
+    function changeQuantity(event) {
+        var currentQuantity = event.currentTarget;
+        var quantity = event.currentTarget.value;
+        var tdPrice = currentQuantity.closest('tr').querySelector('.price');
+        var pricePerOne = tdPrice.innerText;
+        currentQuantity.closest('tr').querySelector('.thanhtien').innerHTML = (parseInt(pricePerOne) * parseInt(quantity))
+        caculateTotalPrice()
+    }
+
+    function caculateTotalPrice() {
+        var tdPrices = document.querySelectorAll('.thanhtien');
+        var totalPrice = 0;
+        for (i = 0; i < tdPrices.length; ++i) {
+            var price = tdPrices[i].innerText;
+            if (price.length > 0) {
+                totalPrice += parseInt(price);
+            }
+
+        }
+
+        document.getElementById("tong").innerHTML = totalPrice;
+    }
+</script>
+
+</html>

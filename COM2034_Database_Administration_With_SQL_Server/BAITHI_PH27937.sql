@@ -1,0 +1,143 @@
+/*Câu 1 (1.5 điểm): Tạo cơ sở dữ liệu QLVT gồm 3 bảng.
+VATTU (MaVT, TenVT, DVTinh)
+PHIEUXUAT (SoPX, NgayXuat)
+CTPXUAT(SoPX, MaVT, SLXuat, DonGia)*/
+CREATE DATABASE BAITHI
+GO
+USE BAITHI
+GO
+
+CREATE TABLE VATTU
+(
+    MaVT VARCHAR(20) PRIMARY KEY,
+    TenVT NVARCHAR(30),
+    DVTinh NVARCHAR(20)
+)
+
+CREATE TABLE PHIEUXUAT
+(
+    SoPX INT PRIMARY KEY,
+    NgayXuat DATE
+)
+
+CREATE TABLE CTPXUAT
+(
+    SoPX INT,
+    MaVT VARCHAR(20),
+    SLXuat INT,
+    DonGia DECIMAL(20,0)
+)
+
+ALTER TABLE CTPXUAT ADD FOREIGN KEY (SoPX) REFERENCES PHIEUXUAT(SoPX)
+ALTER TABLE CTPXUAT ADD FOREIGN KEY (MaVT) REFERENCES VATTU(MaVT)
+
+/*Câu 2 (3 điểm): Chèn thông tin vào các bảng
+Tạo Stored Procedure (SP) với các tham số đầu vào phù hợp.
+SP thứ nhất thực hiện chèn dữ liệu vào bảng VATTU.
+SP thứ hai thực hiện chèn dữ liệu vào bảng PHIEUXUAT.
+SP thứ ba thực hiện chèn dữ liệu vào bảng CTPXUAT.
+Yêu cầu mỗi SP phải kiểm tra tham số đầu vào. Với các cột không chấp nhận thuộc tính Null.
+Với mỗi SP viết 3 lời gọi thành công.*/
+
+GO
+CREATE PROC SP_VATTU(
+    @MaVT VARCHAR(20),
+    @TenVT NVARCHAR(30),
+    @DVTinh NVARCHAR(20)
+)
+AS
+IF @MaVT IS NULL OR @TenVT IS NULL OR @DVTinh IS NULL
+PRINT N'KHÔNG ĐƯỢC ĐỂ TRỐNG'
+ELSE
+INSERT INTO VATTU VALUES(@MaVT, @TenVT, @DVTinh)
+
+EXEC SP_VATTU @MaVT = 'H1', @TenVT = 'PC', @DVTinh = 'VND'
+EXEC SP_VATTU @MaVT = 'H2', @TenVT = 'PHONE', @DVTinh = 'VND'
+EXEC SP_VATTU @MaVT = 'H3', @TenVT = 'BIKE', @DVTinh = 'VND'
+SELECT * FROM VATTU
+
+GO
+CREATE PROC SP_PHIEUXUAT(
+    @SoPX INT,
+    @NgayXuat DATE
+)
+AS
+IF @SoPX IS NULL OR @NgayXuat IS NULL
+PRINT N'KHÔNG ĐƯỢC ĐỂ TRỐNG'
+ELSE
+INSERT INTO PHIEUXUAT VALUES (@SoPX, @NgayXuat)
+
+EXEC SP_PHIEUXUAT @SoPX = 1, @NgayXuat = '2022/02/02'
+EXEC SP_PHIEUXUAT @SoPX = 2, @NgayXuat = '2022/03/02'
+EXEC SP_PHIEUXUAT @SoPX = 3, @NgayXuat = '2022/04/02'
+SELECT * FROM PHIEUXUAT
+
+GO
+CREATE PROC SP_CTPXUAT(
+    @SoPX INT,
+    @MaVT VARCHAR(20),
+    @SLXuat INT,
+    @DonGia DECIMAL(20,0)
+)
+AS
+IF @SoPX IS NULL OR @MaVT IS NULL OR @SLXuat IS NULL OR @DonGia IS NULL
+PRINT N'KHÔNG ĐƯỢC ĐỂ TRỐNG'
+ELSE
+INSERT INTO CTPXUAT VALUES (@SoPX, @MaVT, @SLXuat, @DonGia)
+
+EXEC SP_CTPXUAT @SoPX = 1, @MaVT = 'H1', @SLXuat = 5, @DonGia = 50000
+EXEC SP_CTPXUAT @SoPX = 1, @MaVT = 'H3', @SLXuat = 4, @DonGia = 90000
+EXEC SP_CTPXUAT @SoPX = 3, @MaVT = 'H1', @SLXuat = 8, @DonGia = 50000
+SELECT * FROM CTPXUAT
+
+/*Câu 3 (2 điểm): Viết Hàm
+Viết hàm các tham số đầu vào tương ứng với các cột của bảng VATTU. Hàm này trả về MaVT thỏa mãn các giá trị được truyền tham số. */
+
+GO
+CREATE FUNCTION SEARCH(
+    @MaVT VARCHAR(20),
+    @TenVT NVARCHAR(30),
+    @DVTinh NVARCHAR(20)
+)
+RETURNS NVARCHAR(30)
+BEGIN
+    RETURN (SELECT MaVT FROM VATTU WHERE MaVT = @MaVT AND TenVT = @TenVT AND DVTinh = @DVTinh)
+END
+GO
+DECLARE @MaVT VARCHAR(20)
+SET @MaVT = dbo.SEARCH('H1', 'PC', 'VND')
+SELECT @MaVT AS N'MaVT'
+
+/*Câu 4 (1.5 điểm): Tạo View */
+
+GO
+CREATE VIEW SP
+AS
+    SELECT TOP(2)
+        VATTU.MaVT, VATTU.TenVT, SUM(SLXuat) AS 'TONG SO LUONG XUAT'
+    FROM VATTU JOIN CTPXUAT ON CTPXUAT.MaVT = VATTU.MaVT
+    GROUP BY VATTU.MaVT, VATTU.TenVT, SLXuat
+GO
+SELECT *
+FROM SP
+/*Câu 5 (2 điểm)*/
+
+/*
+GO
+CREATE TRIGGER XOA_SP ON PHIEUXUAT AFTER DELETE
+AS 
+BEGIN
+    DELETE CTPXUAT WHERE SoPX IN (SELECT SoPX FROM DELETED)
+
+END
+GO
+CREATE PROC XOA_VT(@NgayXuat DATE)
+AS
+BEGIN
+    DELETE PHIEUXUAT WHERE SoPX IN (SELECT SoPX FROM CTPXUAT WHERE NgayXuat = @NgayXuat)
+END
+SELECT * FROM VATTU
+SELECT * FROM PHIEUXUAT
+SELECT * FROM CTPXUAT
+EXEC XOA_VT @NgayXuat = '2022/02/02' 
+*/

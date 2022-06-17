@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 5</title>
+    <script>
+        var CuaSo;
+        function openw(){
+            CuaSo = window.open("https://www.icloud.com/", "Icloud", "Toolbar = Yes, Menubar = Yes, width=100")
+        }
+        function closew() {
+            CuaSo.close();
+        }
+        function checkw() {
+            if (CuaSo.closed) {
+                alert('Đã đóng cửa mở')
+            } else {
+                alert('Cửa sổ đang mở')
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="openw()">Mở cửa sổ mới</button>
+    <button onclick="closew()">Đóng cửa sổ mới</button>
+    <button onclick="checkw()">Kiểm tra cửa sổ mới đã đóng hay chưa</button>
+</body>
+</html>

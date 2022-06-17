@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đá Lá Kéo</title>
+</head>
+<body>
+    <style>
+        body {
+          text-align: center;
+        }
+        .container {
+            margin: 0 auto;
+            background-color: skyblue;
+            border-radius: 20px;
+            padding: 25px 50px;
+            width: 80vw;
+        }
+        .action {
+          max-width: 800px;
+          padding: 40px 0;
+          margin: 0 auto;
+          background-color: cadetblue;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-evenly;
+          border-radius: 20px;
+        }
+        .options {
+          flex: 1 1 30%;
+          border-radius: 50%;
+          border-width: 4px;
+          border-style: solid;
+          border-color: rgba(0, 0, 0, 0.7);
+          padding: 10px;
+          animation-name: anim-fade;
+          animation-duration: 1s;
+          animation-fill-mode: forwards;
+          width: 100%;
+          max-width: 120px;
+        }
+        
+      </style>
+      <div class="container">
+        <h1>Trò chơi Đá Lá Kéo</h1>
+        <h2>Chiến thắng năm vòng để trở thành người chiến thắng</h2>
+        <h2>
+          Người chơi <span id="p-score">0</span> - <span id="c-score">0</span> Máy tính
+        </h2>
+        <h2>Nhấp vào hình ảnh bên dưới để chọn nước đi của bạn:<h2>
+        <div class="action">
+          <input class="options" type="image" src="img/Rock.svg" value="Đá" />
+          <input class="options" type="image" src="img/Paper.svg" value="Lá" />
+          <input class="options" type="image" src="img/Scissors.svg" value="Kéo" />
+        </div>
+      </div>
+      <script>
+        const options = document.querySelectorAll(".options");
+        let pScore = 0;
+        let cScore = 0;
+    
+        options.forEach((option) => {
+          option.addEventListener("click", function () {
+            const pInput = this.value;
+    
+            const cOptions = ["Đá", "Lá", "Kéo"];
+            const cInput = cOptions[Math.floor(Math.random() * 3)];
+            
+            compareInputs(pInput, cInput);
+            updateScore();
+            if(checkWinner()){
+              pScore = cScore= 0;
+              updateScore();
+            }
+          });
+        });
+    
+        function compareInputs(pInput, cInput) {
+          const currentMatch = `${pInput} vs ${cInput}`;
+          if (pInput === cInput) {
+            alert(`${currentMatch} Hòa`);
+            return;
+          }
+          //Check Đá
+          if (pInput === "Đá") {
+            if (cInput === "Kéo") {
+              alert(`${currentMatch} = Bạn thắng`);
+              pScore++;
+            } else {
+              alert(`${currentMatch} = Máy tính thắng`);
+              cScore++;
+            }
+          }
+          //Check Lá
+          else if (pInput === "Lá") {
+            if (cInput === "Đá") {
+              alert(`${currentMatch} = Bạn thắng`);
+              pScore++;
+            } else {
+              alert(`${currentMatch} = Máy tính thắng`);
+              cScore++;
+            }
+          }
+          //Check Kéo
+          else if(pInput === "Kéo"){
+            if (cInput === "Lá") {
+              alert(`${currentMatch} = Bạn thắng`);
+              pScore++;
+            } else {
+              alert(`${currentMatch} = Máy tính thắng`);
+              cScore++;
+            }
+          }
+        }
+    
+        function updateScore() {
+          document.getElementById("p-score").textContent = pScore;
+          document.getElementById("c-score").textContent = cScore;
+        }
+    
+        function checkWinner() {
+          if (pScore === 5 || cScore === 5) {
+            const winner =
+              pScore === 5
+                ? "Bạn giành chiến thắng trong trò chơi! Xin chúc mừng!"
+                : "Máy tính chiến thắng trò chơi! Hãy thử lại lần sau!";
+            alert(winner);
+            return true;
+          }
+          return false;
+        }
+      </script>
+</body>
+</html>

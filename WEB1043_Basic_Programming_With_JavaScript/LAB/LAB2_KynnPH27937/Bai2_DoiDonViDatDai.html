@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đổi đơn vị đất đai</title>
+</head>
+<body>
+    <script>
+        var x = prompt("Nhập vào số mét vuông cần đổi");
+
+        if(x == ""){
+            alert("Không nhập đủ hệ số!");
+        }
+        else{
+            if(x = Number(x)){
+                var y = x / 360;
+                var z = y * 0.1;
+                alert(x + "m2 đất là " + y + "sào = " + z + "mãu (Nam Bộ) = " + z +"ha");
+            }
+            else{
+                alert("Không phải số!");
+            }
+        }
+    </script>
+</body>
+</html>

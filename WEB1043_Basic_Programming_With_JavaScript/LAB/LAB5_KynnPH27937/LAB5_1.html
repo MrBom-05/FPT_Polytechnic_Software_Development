@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1</title>
+</head>
+
+<body>
+    <div>
+        <label id="label" data_price="1950">iphone 9</label>
+        <input type="number" value="0" class="so_luong" id="number">
+        <button onclick="get_name()">ok</button>
+        <hr>
+        <h3>Name: <span id="ten_sp">?</span></h3>
+        <h3>Price: <span id="tong_tien">?</span></h3>
+    </div>
+    <script>
+        function get_name() {
+            var x = document.getElementById('label')
+            console.log(x.innerHTML)
+            var name = document.getElementById('ten_sp')
+            name.innerHTML = x.innerHTML
+
+
+            var price = x.getAttribute('data_price')
+            var numberx = document.getElementById('number').value
+
+            var amount = price * numberx
+            console.log(numberx)
+            var tong = document.getElementById('tong_tien')
+            tong.innerHTML = amount
+        }
+    </script>
+</body>
+
+</html>

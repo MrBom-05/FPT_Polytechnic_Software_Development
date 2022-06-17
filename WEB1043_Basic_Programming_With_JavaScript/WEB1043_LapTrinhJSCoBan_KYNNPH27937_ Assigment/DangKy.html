@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="Css/DangKy.css">
+</head>
+
+<body>
+    <div id="wapper">
+        <nav class="menu">
+            <div class="danhmuc">
+                <ul>
+                    <li><a href="SlideAnh.html">SLIDE ẢNH</a></li>
+                    <li><a href="GioHang.html">GIỎ HÀNG</a></li>
+                    <li><a href="DangKy.html">ĐĂNG KÍ</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content">
+            <h1 class="tieudeDK">Đăng ký khóa học</h1>
+            <div class="content-main">
+                <form action="" class="fromDK">
+
+                    <p class="thongtin">Họ và tên</p>
+                    <input type="text" required placeholder="  Nhập họ và tên" class="KhungDK" id="name" />
+                    <p id="nameNoti" style="color:red; display:none">Vui lòng nhập họ và tên</p>
+
+                    <p class="thongtin">Email</p>
+                    <input type="email" required placeholder="  Nhập email" class="KhungDK"
+                        oninvalid="displayNotify('emailFormat')" id="email" />
+                    <p id="emailNoti" style="color:red; display:none">Vui lòng nhập email</p>
+                    <p id="emailFormat" style="color:red; display:none">Email không đúng định dạng</p>
+
+                    <p class="thongtin">Số điện thoại</p>
+                    <input type="number" required placeholder="  Nhập số điện thoại" class="KhungDK" id="phone" />
+                    <p id="phoneEmpty" style="color:red; display:none">Vui lòng nhập số điện thoại</p>
+                    <p id="phoneLength" style="color:red; display:none">Số điện thoại phải gồm 10 số</p>
+
+                    <p class="thongtin">Giới tính</p>
+                    <div class="KhungDK">
+
+                        <label><input type="radio" name="gt" checked="checked">Nam</label>
+                        <label><input type="radio" name="gt">Nữ</label>
+
+                    </div>
+
+                    <p class="thongtin">Khóa học</p>
+                    <select name="" class="KhungDK" onchange="selectCourse()" id="course">
+                        <option value="1000">HTML</option>
+                        <option value="2000">CSS</option>
+                        <option value="3000">Javascript</option>
+                        <option value="4000">JAVA</option>
+                    </select>
+
+                    <p class="thongtin">Học phí</p>
+                    <input type="text" disabled class="KhungDK" value="1000" id="coursePrice" />
+
+                    <br>
+                    <button class="dk btn" type="submit" onclick="validateForm(event)" style="margin-left: 40%;">Đăng
+                        Ký</button>
+                </form>
+            </div>
+        </div>
+        <footer class="footer">
+            Họ Và Tên: Nguyễn Ngọc Kỳ <br>
+            MSSV: PH27937 <br>
+            Lớp: IT17323 <br>
+        </footer>
+    </div>
+
+
+    <script>
+        function displayNotify(notifyId) {
+            document.getElementById(notifyId).style.display = 'block';
+        }
+
+        function hideNotify(notifyId) {
+            document.getElementById(notifyId).style.display = 'none';
+        }
+
+        function validateForm(event) {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var phoneNumber = document.getElementById("phone").value;
+
+            if (name.length > 0) {
+                hideNotify('nameNoti');
+            } else {
+                displayNotify('nameNoti');
+                event.preventDefault();
+            }
+
+            if (email.length > 0) {
+                hideNotify('emailNoti');
+            } else {
+                displayNotify('emailNoti');
+                event.preventDefault();
+            }
+
+            if (phoneNumber.length > 0) {
+                if (phoneNumber.length == 10) {
+                    hideNotify('phoneEmpty');
+                    hideNotify('phoneLength');
+                } else {
+                    hideNotify('phoneEmpty');
+                    displayNotify('phoneLength');
+                    event.preventDefault();
+                }
+            } else {
+                hideNotify('phoneLength');
+                displayNotify('phoneEmpty');
+                event.preventDefault();
+            }
+        }
+
+        function selectCourse() {
+            var price = document.getElementById("course").value;
+            document.getElementById("coursePrice").value = price;
+        }
+
+    </script>
+</body>
+
+</html>

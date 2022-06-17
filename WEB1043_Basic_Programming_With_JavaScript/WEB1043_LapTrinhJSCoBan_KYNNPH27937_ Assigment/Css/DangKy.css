@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#wapper{
+    width: 1200px;
+    margin: auto;
+    font-family: Tahoma;
+}
+.menu{
+    height: 40px;
+    background: #9d9d9d;
+}
+.banner{
+    width: 1200px;
+    background: red;
+    margin: auto;
+}
+.qc{
+    width: 1200px;
+}
+.content{
+    height: 800px;
+    border-left: 1px #cdcdcd solid;
+    border-right: 1px #cdcdcd solid;
+}
+.footer{
+    height: 120px;
+    background: #9d9d9d;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+}
+
+.danhmuc ul li{
+    padding-left: 180px;
+    list-style: none;
+    float: left;
+    line-height: 40px;
+    margin-left: 60px;
+}
+.danhmuc ul li a{
+    color: white;
+    text-decoration: none;
+}
+.danhmuc ul li a:hover{
+    text-decoration: underline;
+    color: black;
+}
+.otk{
+    width: 250px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 200px;
+    border-radius: 5px;
+}
+.nutTk{
+    width: 70px;
+    height: 30px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.tieudeDK{
+    text-transform: uppercase;
+    padding: 15px;
+    text-align: center;
+    color: black;
+    border-bottom: 1px solid #cdcdcd;
+}
+.fromDK{
+    padding-left: 20px;
+}
+.fromDK p{
+    margin-top: 20px;
+}
+.KhungDK{
+    border: #cdcdcd 1px solid;
+    width: 500px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.KhungDK label{
+    padding-left: 15px;
+}
+#GhiChu{
+    border-radius: 10px;
+}
+.dk{
+    width: 100px;
+    height: 60px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+.content-main{
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border:1px solid black;
+    width: 600px;
+}

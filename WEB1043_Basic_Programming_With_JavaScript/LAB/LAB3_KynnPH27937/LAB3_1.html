@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1 Lab 3</title>
+</head>
+<body>
+    <script>
+        var a = prompt("Toán hạng a: ");
+        var b = prompt("Toán hạng b");
+        var o = prompt("Toán tử (+, -, x, :)");
+
+        if(a == "", b == ""){
+            alert("Bạn nhập chưa đủ số");
+        }
+        else if(a = Number(a), b = Number(b)){
+           switch(o){
+                case"+": 
+                    alert("Tổng = " + tinhTong(a, b));
+                    break;
+                case"-":
+                    alert("Hiệu = " + tinhHieu(a, b));
+                    break;
+                case"x":
+                    alert("Tích = " + tinhTich(a, b));
+                    break;
+                case":":
+                    alert("Thương = " + tinhThuong(a, b));
+                    break;
+                default:
+                    alert(o + " Không phải toán tử");
+                    break;
+           }
+        }
+        else{
+            alert("Bạn nhập không phải số")
+        }
+
+        function tinhTong(a, b){
+            return a + b;
+        }
+
+        function tinhHieu(a, b){
+            return a - b;
+        }
+
+        function tinhTich(a, b){
+            return a * b;
+        }
+
+        function tinhThuong(a, b){
+            return a / b;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Show</title>
+    <style>
+        #anh{
+            height: 200px;
+            width: 400px;
+        }
+        .center{
+            text-align: center;
+        }
+    </style>
+    <script src="SlideShow.js"></script>
+</head>
+<body onload="loadAnh();">
+    <div class="center">
+        <img  src="Img/1.jpg" id="anh"> <br>
+        <div style="text-align: center">
+            <input type="button" class="nut" value="Stop" onclick="stop();">
+            <span id="chiso"></span>
+            <input type="button" class="nut" value="Start" onclick="start();">
+        </div>
+        <div>
+            <h3>Nguyễn Ngọc Kỳ PH27937</h3>
+        </div>
+    </div>
+</body>
+</html>

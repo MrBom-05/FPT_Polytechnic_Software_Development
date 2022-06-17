@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#wapper{
+    width: 1200px;
+    margin: auto;
+    font-family: Tahoma;
+}
+.menu{
+    height: 40px;
+    background: #9d9d9d;
+}
+.banner{
+    width: 1200px;
+    background: red;
+    margin: auto;
+}
+.qc{
+    width: 1200px;
+}
+.content{
+    height: 50px;
+    border-left: 1px #cdcdcd solid;
+    border-right: 1px #cdcdcd solid;
+    text-align: center;
+}
+.footer {
+    height: 120px;
+    background: #9d9d9d;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+}
+.danhmuc ul li{
+    padding-left: 180px;
+    list-style: none;
+    float: left;
+    line-height: 40px;
+    margin-left: 60px;
+}
+.danhmuc ul li a{
+    color: white;
+    text-decoration: none;
+}
+.danhmuc ul li a:hover{
+    text-decoration: underline;
+    color: black;
+}
+.bangBanHang{
+    margin: 0 auto;
+}
+.sp td button{   
+    width: 50px;
+    height: 30px;
+}
+.NutThem{
+    width: 70px;
+    height: 30px;
+    margin: 10px;
+}
+#bangHienThi{
+    width: 900px;
+    margin: 10px auto;
+}
+
+#bangHienThi tbody tr td button{
+    width: 70px;
+    height: 30px;
+}
+#bangHienThi tbody tr td{
+    text-align: center;
+}
+
+.item {
+    width: 50px;
+    height: 50px;
+}
+
+.table-content{
+    margin-top: 20px;
+    width: 100%;
+}
+
+input[type='number'] {
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: auto;
+            text-align: center;
+        }
+
+        .tbl {
+            text-align: center;
+            width: 500px;
+            height: 300px;
+        }
+
+        .tbl1 {
+            width: 380px;
+            height: 150px;
+        }
+
+        .cot {
+            width: 120px;
+            height: 25px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .hang {
+            width: 120px;
+            height: 25px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .tinh_tien {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" class="tbl">
+        <tr>
+            <td id="sp1" price="2700" tagx="sp1">Iphone 9</td>
+            <td>$2700</td>
+            <td><button onclick="them(1)">Thêm</button></td>
+        </tr>
+        <tr>
+            <td id="sp2" price="1500" tagx="sp2">Samsung Star</td>
+            <td>$1500</td>
+            <td><button onclick="them(2)">Thêm</button></td>
+        </tr>
+        <tr>
+            <td id="sp3" price="1200" tagx="sp3">Nokia 2020</td>
+            <td>$1200</td>
+            <td><button onclick="them(3)">Thêm</button></td>
+        </tr>
+        <tr>
+            <td id="sp4" price="1600" tagx="sp4">Sony Xperia</td>
+            <td>$1700</td>
+            <td><button onclick="them(4)">Thêm</button></td>
+        </tr>
+
+    </table>
+
+    <h1>Giỏ hàng của bạn</h1>
+    <table border="1" class="tbl1">
+        <tr style="display: none;" id="cot1" tag="1">
+            <td class="cot"><span id="slot1"></span></td>
+            <td class="hang"><span id="slot1.1"></span></td>
+            <td class="hang"><button onclick="xoa(1)">Xóa</button></td>
+        </tr>
+        <tr style="display: none;" id="cot2" tag="2">
+            <td class="cot"><span id="slot2"></span></td>
+            <td class="hang"><span id="slot2.1"></span></td>
+            <td class="hang"><button onclick="xoa(2)">Xóa</button></td>
+        </tr>
+        <tr style="display: none;" id="cot3" tag="3">
+            <td class="cot"><span id="slot3"></span></td>
+            <td class="hang"><span id="slot3.1"></span></td>
+            <td class="hang"><button onclick="xoa(3)">Xóa</button></td>
+        </tr>
+        <tr style="display: none;" id="cot4" tag="4">
+            <td class="cot"><span id="slot4"></span></td>
+            <td class="hang"><span id="slot4.1"></span></td>
+            <td class="hang"><button onclick="xoa(4)">Xóa</button></td>
+        </tr>
+    </table>
+
+    <button onclick="tong()" class="tinh_tien">Tính tiền</button>
+
+    <h1>Tổng số tiền: $<span id="all"></span></h1> 
+</body>
+<script>
+    var a = 1;
+
+    function them(ehe) {
+        if (a == 1) {
+            document.getElementById('cot1').style.display = 'block'
+
+            var tensp = document.getElementById(`sp${ehe}`)
+            var namesp = document.getElementById(`slot1`)
+            namesp.innerHTML = tensp.innerHTML
+
+            var giasp = tensp.getAttribute('price')
+            var price = document.getElementById('slot1.1')
+            price.innerHTML = giasp
+
+            a++
+        } else if (a == 2) {
+            document.getElementById('cot2').style.display = 'block'
+
+            var tensp = document.getElementById(`sp${ehe}`)
+            var namesp = document.getElementById(`slot2`)
+            namesp.innerHTML = tensp.innerHTML
+
+            var giasp = tensp.getAttribute('price')
+            var price = document.getElementById('slot2.1')
+            price.innerHTML = giasp
+
+            a++
+        } else if (a == 3) {
+            document.getElementById('cot3').style.display = 'block'
+
+            var tensp = document.getElementById(`sp${ehe}`)
+            var namesp = document.getElementById(`slot3`)
+            namesp.innerHTML = tensp.innerHTML
+
+            var giasp = tensp.getAttribute('price')
+            var price = document.getElementById('slot3.1')
+            price.innerHTML = giasp
+
+            a++
+        } else if (a == 4) {
+            document.getElementById('cot4').style.display = 'block'
+
+            var tensp = document.getElementById(`sp${ehe}`)
+            var namesp = document.getElementById(`slot4`)
+            namesp.innerHTML = tensp.innerHTML
+
+            var giasp = tensp.getAttribute('price')
+            var price = document.getElementById('slot4.1')
+            price.innerHTML = giasp
+
+            a++
+        } else {
+            alert('Giỏ hàng đã đầy')
+            a = 1
+        }
+
+
+    }
+
+    function xoa(hehe) {
+        if (hehe == 1) {
+            var price = document.getElementById('slot1.1')
+            price.innerHTML = ''
+            var tensp = document.getElementById('slot1')
+            tensp.innerHTML = ''
+            a = 1
+
+            document.getElementById(`cot${hehe}`).style.display = 'none'
+        } else if (hehe == 2) {
+            var price = document.getElementById('slot2.1')
+            price.innerHTML = ''
+            var tensp = document.getElementById('slot2')
+            tensp.innerHTML = ''
+            a = 1
+
+            document.getElementById(`cot${hehe}`).style.display = 'none'
+        } else if (hehe == 3) {
+            var price = document.getElementById('slot3.1')
+            price.innerHTML = ''
+            var tensp = document.getElementById('slot3')
+            tensp.innerHTML = ''
+            a = 1
+
+            document.getElementById(`cot${hehe}`).style.display = 'none'
+        } else if (hehe == 4) {
+            var price = document.getElementById('slot4.1')
+            price.innerHTML = ''
+            var tensp = document.getElementById('slot4')
+            tensp.innerHTML = ''
+            a = 1
+
+            document.getElementById(`cot${hehe}`).style.display = 'none'
+        }
+    }
+
+
+    function tong() {
+        var tien1 = Number(document.getElementById('slot1.1').innerHTML)
+        var tien2 = Number(document.getElementById('slot2.1').innerHTML)
+        var tien3 = Number(document.getElementById('slot3.1').innerHTML)
+        var tien4 = Number(document.getElementById('slot4.1').innerHTML)
+        var tien = tien1 + tien2 + tien3 + tien4
+        document.getElementById('all').innerHTML = tien
+    }
+</script>
+
+</html>

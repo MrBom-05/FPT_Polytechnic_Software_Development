@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide ảnh</title>
+    <link rel="stylesheet" href="Css/SlideAnh.css">
+</head>
+
+<body>
+    <div id="wapper">
+
+        <nav class="menu">
+            <div class="danhmuc">
+                <ul>
+                    <li><a href="SlideAnh.html">SLIDE ẢNH</a></li>
+                    <li><a href="GioHang.html">GIỎ HÀNG</a></li>
+                    <li><a href="DangKy.html">ĐĂNG KÍ</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="box-img">
+            <img class="img fade-in-img" id="slider" src="" alt="" />
+        </div>
+
+        <div class="menu list-btn">
+            <button class="btn" onclick="goFirst()">FIRST</button>
+            <button class="btn" onclick="goBack()">BACK</button>
+            <button class="btn" onclick="stopAuto()">STOP</button>
+            <p class="page-number">
+                <span class="current-number active" id="current-number"> </span>
+                <span class="total-image" id="total-image"> </span>
+            </p>
+            <button class="btn" onclick="startAuto()">START</button>
+            <button class="btn" onclick="goNext()">NEXT</button>
+            <button class="btn" onclick="goLast()">FINSL</button>
+        </div>
+        <footer class="footer">
+            Họ Và Tên: Nguyễn Ngọc Kỳ <br>
+            MSSV: PH27937 <br>
+            Lớp: IT17323 <br>
+        </footer>
+
+    </div>
+
+
+    <script>
+        var arrayImage = ["./Img/1.jpg", "./Img/2.jpg", "./Img/3.jpg", "./Img/4.jpg", "./Img/5.jpg"];
+        var index = 0;
+        var intervalTime = 1000;
+        var timer = null;
+
+        document.getElementById('slider').src = arrayImage[index];
+        document.getElementById('current-number').innerHTML = (index + 1);
+        document.getElementById('total-image').innerHTML = "/ " + arrayImage.length;
+
+        function goFirst() {
+            index = 0;
+            document.getElementById('slider').src = arrayImage[index];
+            document.getElementById('current-number').innerHTML = (index + 1);
+            document.getElementById('total-image').innerHTML = "/ " + arrayImage.length;
+        }
+
+        function goLast() {
+            index = (arrayImage.length - 1);
+            document.getElementById('slider').src = arrayImage[index];
+            document.getElementById('current-number').innerHTML = (index + 1);
+            document.getElementById('total-image').innerHTML = "/ " + arrayImage.length;
+        }
+
+        function goNext() {
+            if (index < arrayImage.length - 1) {
+                index += 1;
+            } else {
+                index = 0;
+            }
+
+            document.getElementById('slider').src = arrayImage[index];
+            document.getElementById('current-number').innerHTML = (index + 1);
+            document.getElementById('total-image').innerHTML = "/ " + arrayImage.length;
+        }
+
+        function goBack() {
+            if (index > 0) {
+                index -= 1;
+            } else {
+                index = (arrayImage.length - 1);
+            }
+
+            document.getElementById('slider').src = arrayImage[index];
+            document.getElementById('current-number').innerHTML = (index + 1);
+            document.getElementById('total-image').innerHTML = "/ " + arrayImage.length;
+        }
+
+        function startAuto() {
+            if (timer !== null) return;
+            timer = setInterval(goNext, intervalTime);
+        }
+
+        function stopAuto() {
+            clearInterval(timer);
+            timer = null
+        }
+
+    </script>
+</body>
+
+</html>
