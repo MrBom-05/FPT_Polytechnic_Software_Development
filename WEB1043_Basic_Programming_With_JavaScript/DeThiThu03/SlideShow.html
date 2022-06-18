@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideShow</title>
+</head>
+
+<body onclick="auto();">
+    <div class="center">
+        <div style="text-align: center;">
+            <div>
+                <img id="slide" src="" alt="">
+            </div>
+            <button onclick="goFirst();">FIRST</button>
+            <p>
+                <span id="number"></span>
+                <span id="image"></span>
+            </p>
+            <button onclick="goFinsl();">FINSL</button>
+        </div>
+    </div>
+</body>
+<script>
+    var arrayImage = ["./Img/1.jpg", "./Img/2.jpg", "./Img/3.jpg", "./Img/4.jpg", "./Img/5.jpg"];
+    var index = 0;
+    var intervalTime = 1000;
+    var timer = null;
+
+    document.getElementById('slide').src = arrayImage[index];
+    document.getElementById('number').innerHTML = (index + 1);
+    document.getElementById('image').innerHTML = "/ " + arrayImage.length;
+
+    function goFirst() {
+        index = 0;
+        document.getElementById('slide').src = arrayImage[index];
+        document.getElementById('number').innerHTML = (index + 1);
+        document.getElementById('image').innerHTML = "/ " + arrayImage.length;
+    }
+    function goFinsl() {
+        index = (arrayImage.length -1);
+        document.getElementById('slide').src = arrayImage[index];
+        document.getElementById('number').innerHTML = (index + 1);
+        document.getElementById('image').innerHTML = "/ " + arrayImage.length;
+    }
+    function next(){
+        if (index < arrayImage.length - 1){
+            index += 1;
+        }
+        else{
+            index = 0;
+        }
+        document.getElementById('slide').src = arrayImage[index];
+        document.getElementById('number').innerHTML = (index + 1);
+        document.getElementById('image').innerHTML = "/ " + arrayImage.length;
+    }
+    function auto(){
+        if (timer != null) return;
+        timer = setInterval(next, intervalTime);
+    }
+</script>
+
+</html>

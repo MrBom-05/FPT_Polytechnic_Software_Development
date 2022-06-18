@@ -1,0 +1,22 @@
+.wrapper{
+    margin: 5px auto;
+    display: flex;
+}
+.center{
+    width: auto;
+    margin: auto;
+    border: solid 2px blueviolet;
+    padding: 20px;
+}
+.table{
+    margin-top: 20px;
+    border: 1px;
+}
+.loi{
+    color: red;
+}
+.nut{
+    margin-left: 200px; 
+    margin-top: 20px;
+    border: solid 1px blueviolet;
+}

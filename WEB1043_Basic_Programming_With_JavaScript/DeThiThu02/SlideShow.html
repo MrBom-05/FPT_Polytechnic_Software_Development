@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +8,64 @@
     <title>Slide Show</title>
     <style>
         #anh{
-            height: 200px;
+            height: 400px;
             width: 400px;
         }
         .center{
             text-align: center;
         }
     </style>
-    <script src="SlideShow.js"></script>
 </head>
-<body onload="loadAnh();">
+
+<body onload="startAuto();">
     <div class="center">
-        <img  src="Img/1.jpg" id="anh"> <br>
         <div style="text-align: center">
-            <input type="button" class="nut" value="Stop" onclick="stop();">
-            <span id="chiso"></span>
-            <input type="button" class="nut" value="Start" onclick="start();">
+            <div>
+                <img id="slide" src="" alt="" />
+            </div>
+            <button onclick="stopAuto()">STOP</button>
+            <p>
+                <span id="number"> </span>
+                <span id="image"> </span>
+            </p>
+            <button onclick="startAuto()">START</button>
         </div>
         <div>
             <h3>Nguyễn Ngọc Kỳ PH27937</h3>
         </div>
     </div>
 </body>
+<script>
+    var arrayImage = ["./Img/1.jpg", "./Img/2.jpg", "./Img/3.jpg", "./Img/4.jpg", "./Img/5.jpg"];
+    var index = 0;
+    var intervalTime = 1000;
+    var timer = null;
+
+    document.getElementById('slide').src = arrayImage[index];
+    document.getElementById('number').innerHTML = (index + 1);
+    document.getElementById('image').innerHTML = "/ " + arrayImage.length;
+
+    function goNext() {
+        if (index < arrayImage.length - 1) {
+            index += 1;
+        } else {
+            index = 0;
+        }
+
+        document.getElementById('slide').src = arrayImage[index];
+        document.getElementById('number').innerHTML = (index + 1);
+        document.getElementById('image').innerHTML = "/ " + arrayImage.length;
+    }
+
+    function startAuto() {
+        if (timer !== null) return;
+        timer = setInterval(goNext, intervalTime);
+    }
+
+    function stopAuto() {
+        clearInterval(timer);
+        timer = null
+    }
+
+</script>
 </html>

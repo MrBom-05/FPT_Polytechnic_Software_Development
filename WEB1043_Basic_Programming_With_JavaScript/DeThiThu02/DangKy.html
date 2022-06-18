@@ -6,33 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký</title>
     <script src="DangKy.js"></script>
+    <link rel="stylesheet" href="Dangky.css">
 </head>
 <body>
-    <div>
-        <form method="post" action="" id="loginform"></form>
-        <table border="0">
-            <tr>
-                <th>Tên khách hàng</th>
-                <th>
-                    <input class="textcolor" type="text" id="ten" name="ten" value="">
-                    <span id="ten_error" class="loi"></span>
-                </th>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>
-                    <input class="textcolor" type="text" id="email" name="email" value="">
-                    <span id="email_error" class="loi"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" class="nut" onclick="return validate();" id="btn" name="btn" value="Đặt hàng">
-                </td>
-            </tr>
-        </table>
+    <div class="wrapper">
+        <div class="center">
+            <form method="post" action="" id="loginform">
+                <h3 style="text-align: center;"> Đơn hàng</h3>
+                <table>
+                    <tr>
+                        <td style="width: 150px;">Tên Khách Hàng</td>
+                        <td><input type="text" id="tenkh" value=""></td>
+                        <td><span class="loi" id="tenkh_loi"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" id="email" value=""></td>
+                        <td><span class="loi" id="email_loi"></span></td>
+                    </tr>
+                </table>
+                <!-- <table border="1px" id="listhang">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Hàng hóa</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Motorola Edge X30</td>
+                            <td>4800000</td>
+                            <td>
+                                <input class="textcolor" type="text" onchange="tinhtien(this)" type="number" value="0" min="0" step="1">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>SamSung Galaxy A53</td>
+                            <td>8000000</td>
+                            <td>
+                                <input class="textcolor" type="text" onchange="tinhtien(this)" type="number" value="0" min="0" step="1">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Bphone A85</td>
+                            <td>3600000</td>
+                            <td>
+                                <input class="textcolor" type="text" onchange="tinhtien(this)" type="number" value="0" min="0" step="1">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Nokia G21</td>
+                            <td>5200000</td>
+                            <td>
+                                <input class="textcolor" type="text" onchange="tinhtien(this)" type="number" value="0" min="0" step="1">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Iphone 12</td>
+                            <td>16000000</td>
+                            <td>
+                                <input class="textcolor" type="text" onchange="tinhtien(this)" type="number" value="0" min="0" step="1">
+                            </td>
+                            <td></td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot style="background-color: red;">
+                        <tr>
+                            <th colspan="4">Tổng</th>
+                            <th id="tongtien"></th>
+                        </tr>
+                    </tfoot>
+                </table> -->
+            
+            <input type="button" class="nut" onclick="return check();" id="btn" name="btn" value="Đặt hàng">
+            </form>
+        </div>
     </div>
-    <div>
+    <div style="text-align: center;">
         <h3>Nguyễn Ngọc Kỳ PH27937</h3>
     </div>
 </body>
