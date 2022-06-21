@@ -1,9 +1,16 @@
 package MyJob;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +23,25 @@ public class MyJobManageFrame extends javax.swing.JFrame {
     public MyJobManageFrame() {
         initComponents();
         this.listMyJob = new MyJobManage();
+        new Thread(){
+            public void run(){
+                while (true) {                    
+                    Calendar ca = new GregorianCalendar();
+                    
+                    int hour = ca.get(Calendar.HOUR_OF_DAY);
+                    int minute = ca.get(Calendar.MINUTE);
+                    int second = ca.get(Calendar.SECOND);
+                    
+                    String time = hour + " : " + minute + " : " + second;
+                    lblClock.setText(time);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +71,8 @@ public class MyJobManageFrame extends javax.swing.JFrame {
         btnWrite = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnRead = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lblClock = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,6 +194,8 @@ public class MyJobManageFrame extends javax.swing.JFrame {
             }
         });
 
+        lblClock.setText("00 : 00 : 00");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,7 +204,14 @@ public class MyJobManageFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
-                        .addComponent(lblMyJob, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblMyJob, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(lblClock))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -217,9 +254,17 @@ public class MyJobManageFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lblMyJob)
-                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMyJob)
+                            .addComponent(jLabel5))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblClock)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNameJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -336,24 +381,63 @@ public class MyJobManageFrame extends javax.swing.JFrame {
 
     private void btnSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortActionPerformed
         ArrayList<MyJob> list = this.listMyJob.getList();
-        
+
         Collections.sort(list, (o1, o2) -> {
-            return o1.getNameJob().compareTo(o2.getNameJob()); 
+            return o1.getNameJob().compareTo(o2.getNameJob());
         });
         this.loadTable();
         this.clearForm();
     }//GEN-LAST:event_btnSortActionPerformed
 
     private void btnWriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteActionPerformed
-        
+        try {
+            File file = new File(fileName);
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.listMyJob.getList());
+            oos.close();
+            JOptionPane.showMessageDialog(this, "Ghi thành công");
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy file");
+            e.printStackTrace();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi vào ra");
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_btnWriteActionPerformed
 
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
-        
+        File file = new File(fileName);
+        if (file.exists() == false) {
+            return;
+        }
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<MyJob> list = (ArrayList<MyJob>) ois.readObject();
+            ois.close();
+            this.listMyJob.setList(list);
+            this.loadTable();
+            JOptionPane.showMessageDialog(this, "Đọc thành công");
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy file");
+            e.printStackTrace();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi vào ra");
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi dữ liệu");
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_btnReadActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        
+        this.listMyJob.insert(new MyJob("Lập trình", "FPT", 1, 400000));
+        this.listMyJob.insert(new MyJob("Thiết kế", "GOOGLE", 0, 3000));
+        this.loadTable();
+        this.clearForm();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void tblMyJobMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMyJobMouseClicked
@@ -425,10 +509,7 @@ public class MyJobManageFrame extends javax.swing.JFrame {
         MyJob myJob = new MyJob(nameJob, companysName, docter, Double.parseDouble(income));
         return myJob;
     }
-    
-    private void Write () throws FileNotFoundException{
-        FileInputStream file = new FileInputStream(fileName);
-    }
+
     public static void main(String args[]) {
 
         try {
@@ -470,9 +551,11 @@ public class MyJobManageFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblClock;
     private javax.swing.JLabel lblMyJob;
     private javax.swing.JRadioButton rdoNo;
     private javax.swing.JRadioButton rdoYes;

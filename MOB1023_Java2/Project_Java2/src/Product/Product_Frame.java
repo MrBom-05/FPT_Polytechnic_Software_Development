@@ -11,24 +11,24 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Product_Frame extends javax.swing.JFrame {
+
     private QuanLyProduct listProduct;
-     private String filename = "Product_IOS.txt";
-    
+    private String filename = "Product_IOS.txt";
+
     public Product_Frame() {
         initComponents();
-        
+
         this.listProduct = new QuanLyProduct();
         this.listProduct.insert(new Product("Máy Tính", 20000));
         this.listProduct.insert(new Product("Điện Thoại", 10000));
         this.listProduct.insert(new NoTaxProduct("Sách", 5000));
-        
+
         this.clearForm();
         this.loadTable();
     }
 
-    private void loadTable (){
+    private void loadTable() {
         ArrayList<Product> danhSach = this.listProduct.getList();
         DefaultTableModel dtm = (DefaultTableModel) this.tblSanPham.getModel();
         dtm.setRowCount(0);
@@ -37,11 +37,12 @@ public class Product_Frame extends javax.swing.JFrame {
                 product.getName(),
                 product.getPrice(),
                 product.getImportTax()
-                
+
             };
             dtm.addRow(row);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -259,18 +260,17 @@ public class Product_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-       int row = this.tblSanPham.getSelectedRow();
-       
-       if(row == -1){
-           return;
-       }
-       
+        int row = this.tblSanPham.getSelectedRow();
+
+        if (row == -1) {
+            return;
+        }
+
         txtTenSP.setText(tblSanPham.getValueAt(row, 0).toString());
         txtDonGia.setText(tblSanPham.getValueAt(row, 1).toString());
-        if (Double.valueOf( tblSanPham.getValueAt(row, 2).toString())>0) {
+        if (Double.valueOf(tblSanPham.getValueAt(row, 2).toString()) > 0) {
             this.rdoCoThue.setSelected(true);
-        } 
-        else  {
+        } else {
             this.rdoKhongThue.setSelected(true);
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
@@ -278,9 +278,9 @@ public class Product_Frame extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         Product product = this.getFormDate();
         if (product == null) {
-            return ;
+            return;
         }
-        
+
         this.listProduct.insert(product);
         this.loadTable();
         this.clearForm();
@@ -297,9 +297,9 @@ public class Product_Frame extends javax.swing.JFrame {
         if (product == null) {
             return;
         }
-        
+
         this.listProduct.update(row, product);
-        
+
         this.loadTable();
         this.clearForm();
         JOptionPane.showMessageDialog(this, "Cập nhật thành công");
@@ -307,30 +307,28 @@ public class Product_Frame extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?");
-        
-        if(confirm == JOptionPane.NO_OPTION){
+
+        if (confirm == JOptionPane.NO_OPTION) {
             return;
-        }
-        else if (confirm == JOptionPane.CANCEL_OPTION) {
+        } else if (confirm == JOptionPane.CANCEL_OPTION) {
             return;
+        } else {
+
         }
-        else{
-            
-        }
-        
+
         int row = this.tblSanPham.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Chọn 1 dòng trên Table để xóa");
             return;
         }
-        
+
         this.listProduct.delete(row);
         this.loadTable();
         this.clearForm();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocActionPerformed
-       File file = new File(filename);
+        File file = new File(filename);
         if (file.exists() == false) {
             JOptionPane.showMessageDialog(this, "File ko tồn tại");
             return;
@@ -357,7 +355,7 @@ public class Product_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDocActionPerformed
 
     private void btnGhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGhiActionPerformed
-       try {
+        try {
             File file = new File(this.filename);
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -373,9 +371,8 @@ public class Product_Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGhiActionPerformed
 
-    
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -423,15 +420,16 @@ public class Product_Frame extends javax.swing.JFrame {
     private javax.swing.JTextField txtDonGia;
     private javax.swing.JTextField txtTenSP;
     // End of variables declaration//GEN-END:variables
-    private void clearForm(){
+    private void clearForm() {
         this.txtTenSP.setText("");
         this.txtDonGia.setText("");
         this.rdoCoThue.setSelected(true);
     }
-    private Product getFormDate(){
+
+    private Product getFormDate() {
         String tenSP = this.txtTenSP.getText();
         String donGia = this.txtDonGia.getText();
-        
+
         if (tenSP.trim().length() == 0 || donGia.trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
         }
@@ -445,12 +443,11 @@ public class Product_Frame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Đơn giá phải là số");
             return null;
         }
-        
-        if(rdoCoThue.isSelected() == true){
+
+        if (rdoCoThue.isSelected() == true) {
             Product product = new Product(tenSP, Double.parseDouble(donGia));
             return product;
-        }
-        else{
+        } else {
             NoTaxProduct noTaxProduct = new NoTaxProduct(tenSP, Double.parseDouble(donGia));
             return noTaxProduct;
         }
