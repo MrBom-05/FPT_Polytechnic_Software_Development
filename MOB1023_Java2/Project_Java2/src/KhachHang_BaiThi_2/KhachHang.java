@@ -40,14 +40,14 @@ public class KhachHang implements Serializable{
         this.gioiTinh = gioiTinh;
     }
     
-    public String getStatu(int tuoiKH){
+    public String getStatus(int tuoiKH){
         String trangThai = null;
         tuoiKH = getTuoiKH();
         if(tuoiKH >= 18){
-            trangThai = "Trưởng thành";
+            trangThai = "Thành niên";
         }
         else{
-            trangThai = "Chưa trưởng thành";
+            trangThai = "Vị thành niên";
         }
         return trangThai;
     }
